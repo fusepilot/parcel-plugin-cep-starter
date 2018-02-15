@@ -4,7 +4,14 @@ const os = nodeRequire('os')
 const path = nodeRequire('path')
 const pino = nodeRequire('pino')
 
-function getLogPath(id: string): string {
+import * as os2 from 'os'
+import * as p2 from 'path'
+import * as p from 'pino'
+
+const p3 = import('pino')
+console.log(p3)
+
+export function getLogPath(id: string): string {
   const homeDir = os.homedir ? os.homedir() : process.env['HOME']
   const file = `${id}.log`
   const platform = os.platform()

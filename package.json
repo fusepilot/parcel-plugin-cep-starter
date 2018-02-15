@@ -6,6 +6,9 @@
   "scripts": {
     "start": "concurrently \"yarn run start-ui\" \"yarn run start-jsx\"",
     "start-ui": "parcel src/ui/index.ui.html",
+    "start-ui-clean":
+      "rm -rf ./dist && parcel src/ui/index.ui.html --no-cache --no-hmr --no-source-maps",
+    "start-ui-babel": "rm -rf ./dist && babel src/ui/babel-test.js",
     "start-jsx": "parcel watch src/jsx/index.jsx.ts --no-hmr --no-source-maps",
     "build": "parcel build src/ui/index.ui.html"
   },
@@ -16,9 +19,13 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "@types/pino": "^4.7.1",
     "@types/react": "^16.0.31",
     "@types/react-dom": "^16.0.3",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-extendscript": "^0.0.3",
     "babel-preset-react": "^6.24.1",
     "concurrently": "^3.5.1",
