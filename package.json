@@ -14,7 +14,7 @@
     "start-jsx": "parcel watch src/jsx/index.jsx.ts --no-hmr --no-source-maps",
     "build": "yarn run build-js && yarn run build-jsx",
     "build-js": "parcel build src/js/index.html --public-url .",
-    "build-jsx": "parcel build src/jsx/index.jsx.ts",
+    "build-jsx": "parcel build src/jsx/index.jsx.ts --no-minify",
     "zxp": "create-zxp ./dist"
   },
   "dependencies": {
