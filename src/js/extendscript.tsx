@@ -20,8 +20,9 @@ if (inCEPEnvironment()) {
 
   logger.info("start", extensionPath);
 
-  const manifest = fs.readJsonSync(path.join(extensionPath, "manifest.json"));
-  loadExtendscript(manifest["index.jsx.ts"]);
+  // NOTE This references the compiled file, so it’s necessary to
+  //      use the `.jsx.js` extension, instead of `.jsx.ts`.
+  loadExtendscript("index.jsx.js");
 
   const host = getHostEnvironment();
   if (host) {
