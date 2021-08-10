@@ -8,5 +8,8 @@
     "types": ["AfterEffects/18.0"],
     "typeRoots": ["../../node_modules/types-for-adobe"]
   },
-  "include": ["./**/*"]
+  "include": [
+    "./**/*",
+    "../../node_modules/types-for-adobe/shared/PlugPlugExternalObject.d.ts",
+  ]
 }
