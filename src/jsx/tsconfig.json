@@ -6,7 +6,10 @@
     "noLib": true,
     "strict": true,
     "types": ["AfterEffects/18.0"],
-    "typeRoots": ["../../node_modules/types-for-adobe"]
+    "typeRoots": [
+      "../../node_modules/types-for-adobe",
+      "./typings"
+    ]
   },
   "include": [
     "./**/*",
