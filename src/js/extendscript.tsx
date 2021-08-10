@@ -28,8 +28,8 @@ if (inCEPEnvironment()) {
   if (host) {
     const skin = host.appSkinInfo;
     const bgColor = skin.panelBackgroundColor.color as RGBColor;
-    document.body.style.background = `rgb(${parseInt(bgColor.red)}, ${parseInt(bgColor.green)}, ${
-      parseInt(bgColor.blue)
+    document.body.style.background = `rgb(${parseInt(bgColor.red.toString())}, ${parseInt(bgColor.green.toString())}, ${
+      parseInt(bgColor.blue.toString())
     })`;
   }
 }
