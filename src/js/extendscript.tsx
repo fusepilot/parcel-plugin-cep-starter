@@ -20,15 +20,16 @@ if (inCEPEnvironment()) {
 
   logger.info("start", extensionPath);
 
-  const manifest = fs.readJsonSync(path.join(extensionPath, "manifest.json"));
-  loadExtendscript(manifest["index.jsx.ts"]);
+  // NOTE This references the compiled file, so it’s necessary to
+  //      use the `.jsx.js` extension, instead of `.jsx.ts`.
+  loadExtendscript("index.jsx.js");
 
   const host = getHostEnvironment();
   if (host) {
     const skin = host.appSkinInfo;
     const bgColor = skin.panelBackgroundColor.color as RGBColor;
-    document.body.style.background = `rgb(${parseInt(bgColor.red)}, ${parseInt(bgColor.green)}, ${
-      parseInt(bgColor.blue)
+    document.body.style.background = `rgb(${parseInt(bgColor.red.toString())}, ${parseInt(bgColor.green.toString())}, ${
+      parseInt(bgColor.blue.toString())
     })`;
   }
 }

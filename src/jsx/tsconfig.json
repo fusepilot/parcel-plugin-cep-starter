@@ -3,9 +3,16 @@
     "target": "es3",
     "module": "commonjs",
     "moduleResolution": "node",
+    "noLib": true,
     "strict": true,
-    "types": ["AfterEffects/2018"],
-    "typeRoots": ["../../node_modules/types-for-adobe"]
+    "types": ["AfterEffects/18.0"],
+    "typeRoots": [
+      "../../node_modules/types-for-adobe",
+      "./typings"
+    ]
   },
-  "include": ["./**/*"]
+  "include": [
+    "./**/*",
+    "../../node_modules/types-for-adobe/shared/PlugPlugExternalObject.d.ts",
+  ]
 }
