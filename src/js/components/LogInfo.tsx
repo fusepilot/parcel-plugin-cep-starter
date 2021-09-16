@@ -1,65 +1,60 @@
 import * as React from "react";
+import { useExtensionProperties } from "../hooks/useExtensionProperties";
+import { usePlatform } from "../hooks/usePlatform";
 
-export default class LogInfo extends React.Component {
-  state: {
-    logPath?: string;
-    isInCEPEnvironment: boolean;
-    platform?: string;
-  } = {
-    isInCEPEnvironment: false
-  };
+export default function LogInfo() {
+  const [logPath, setLogPath] = React.useState(null);
+  const platform = usePlatform();
 
-  async componentWillMount() {
-    const { inCEPEnvironment } = await import("cep-interface");
+  const { isInCEPEnvironment, name } = useExtensionProperties();
 
-    if (inCEPEnvironment()) {
-      const { logPath } = await import("../logger");
-      // @ts-ignore
-      const process = window.cep_node.require("process");
-      this.setState({
-        logPath,
-        isInCEPEnvironment: true,
-        platform: process.platform
-      });
+  React.useEffect(() => {
+    async function loadLogPath() {
+      if (isInCEPEnvironment) {
+        const { logPath } = await import("../logger");
+        setLogPath(logPath);
+      }
     }
-  }
 
-  onLog = async (level: string) => {
-    const { inCEPEnvironment } = await import("cep-interface");
-    if (inCEPEnvironment()) {
+    loadLogPath();
+  }, []);
+
+  const logMessage = async (level: string, message: string = "log") => {
+    if (isInCEPEnvironment) {
       const { logger } = await import("../logger");
-      logger[level]("log");
+      logger[level](message);
     }
   };
 
-  openLog = async () => {
-    const { inCEPEnvironment } = await import("cep-interface");
-    if (inCEPEnvironment()) {
+  const openLog = async () => {
+    if (isInCEPEnvironment) {
       // @ts-ignore
       const child = window.cep_node.require("child_process");
-      if (this.state.platform === "darwin") {
-        child.spawn("open", [this.state.logPath]);
+      if (platform === "darwin") {
+        child.spawn("open", [logPath]);
       }
     }
   };
 
-  render() {
-    return (
-      <div className="LogInfo">
-        <h3>Log Info</h3>
+  return (
+    <div className="LogInfo">
+      <h3>Log Info</h3>
 
-        {!this.state.isInCEPEnvironment && <p>Not in CEP environment.</p>}
+      {isInCEPEnvironment && <p>Not in CEP environment.</p>}
 
-        <ul>
-          <li>Path: {this.state.logPath}</li>
-        </ul>
+      <ul>
+        <li>Path: {logPath}</li>
+      </ul>
 
-        {this.state.platform == "darwin" && (
-          <button onClick={this.openLog}>Open Log</button>
-        )}
-        <button onClick={this.onLog.bind(this, "info")}>Log Info</button>
-        <button onClick={this.onLog.bind(this, "error")}>Log Error</button>
-      </div>
-    );
-  }
+      {platform == "darwin" && (
+        <button onClick={() => openLog()}>Open Log</button>
+      )}
+      <button onClick={() => logMessage("info", `Info from CEP`)}>
+        Log Info
+      </button>
+      <button onClick={() => logMessage("error", `Error from CEP`)}>
+        Log Error
+      </button>
+    </div>
+  );
 }
