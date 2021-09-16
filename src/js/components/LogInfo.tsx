@@ -11,13 +11,13 @@ export default function LogInfo() {
   React.useEffect(() => {
     async function loadLogPath() {
       if (isInCEPEnvironment) {
-        const { logPath } = await import("../logger");
-        setLogPath(logPath);
+        const logger = await import("../logger");
+        setLogPath(logger.logPath);
       }
     }
 
     loadLogPath();
-  }, []);
+  }, [isInCEPEnvironment]);
 
   const logMessage = async (level: string, message: string = "log") => {
     if (isInCEPEnvironment) {
@@ -40,7 +40,7 @@ export default function LogInfo() {
     <div className="LogInfo">
       <h3>Log Info</h3>
 
-      {isInCEPEnvironment && <p>Not in CEP environment.</p>}
+      {!isInCEPEnvironment && <p>Not in CEP environment.</p>}
 
       <ul>
         <li>Path: {logPath}</li>
