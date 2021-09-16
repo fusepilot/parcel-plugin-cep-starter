@@ -10,10 +10,10 @@
   "license": "MIT",
   "scripts": {
     "start": "concurrently \"yarn run start-js\" \"yarn run start-jsx\"",
-    "start-js": "parcel panel/src/index.html",
+    "start-js": "parcel extension/src/index.html",
     "start-jsx": "parcel watch script/src/index.jsx.ts --no-hmr --no-source-maps",
     "build": "yarn run build-js && yarn run build-jsx",
-    "build-js": "parcel build panel/src/index.html --public-url .",
+    "build-js": "parcel build extension/src/index.html --public-url .",
     "build-jsx": "parcel build script/src/index.jsx.ts --no-minify",
     "zxp": "create-zxp ./dist"
   },
