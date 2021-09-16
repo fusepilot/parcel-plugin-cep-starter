@@ -1,3 +1,4 @@
+import { Flex, Heading, Text } from "@adobe/react-spectrum";
 import * as React from "react";
 import { useExtensionProperties } from "../hooks/useExtensionProperties";
 
@@ -5,17 +6,25 @@ export default function AdobeAppInfo() {
   const extensionProperties = useExtensionProperties();
 
   return (
-    <div className="AdobeAppInfo">
-      <h3>Adobe App Info</h3>
+    <Flex direction="column">
+      <Heading level={2}>Adobe App Info</Heading>
       {!extensionProperties.isInCEPEnvironment && (
-        <p>Not in CEP environment.</p>
+        <Text>Not in CEP environment.</Text>
       )}
       <ul>
-        <li>Id: {extensionProperties.id}</li>
-        <li>Name: {extensionProperties.name}</li>
-        <li>Version: {extensionProperties.version}</li>
-        <li>Extension Path: {extensionProperties.extensionPath}</li>
+        <li>
+          <Text>Id: {extensionProperties.id}</Text>
+        </li>
+        <li>
+          <Text>Name: {extensionProperties.name}</Text>
+        </li>
+        <li>
+          <Text>Version: {extensionProperties.version}</Text>
+        </li>
+        <li>
+          <Text>Extension Path: {extensionProperties.extensionPath}</Text>
+        </li>
       </ul>
-    </div>
+    </Flex>
   );
 }

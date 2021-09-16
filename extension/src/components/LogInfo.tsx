@@ -1,3 +1,5 @@
+import { ButtonGroup, Flex, Heading, Text, View } from "@adobe/react-spectrum";
+import { Button } from "@react-spectrum/button";
 import * as React from "react";
 import { useExtensionProperties } from "../hooks/useExtensionProperties";
 import { usePlatform } from "../hooks/usePlatform";
@@ -37,24 +39,29 @@ export default function LogInfo() {
   };
 
   return (
-    <div className="LogInfo">
-      <h3>Log Info</h3>
-
-      {!isInCEPEnvironment && <p>Not in CEP environment.</p>}
-
-      <ul>
-        <li>Path: {logPath}</li>
-      </ul>
-
-      {platform == "darwin" && (
-        <button onClick={() => openLog()}>Open Log</button>
-      )}
-      <button onClick={() => logMessage("info", `Info from CEP`)}>
-        Log Info
-      </button>
-      <button onClick={() => logMessage("error", `Error from CEP`)}>
-        Log Error
-      </button>
-    </div>
+    <Flex direction="column" gap="size-200">
+      <Heading level={2}>Log Info</Heading>
+      {!isInCEPEnvironment && <Text>Not in CEP environment.</Text>}
+      <Text>Path: {logPath}</Text>
+      <ButtonGroup>
+        {platform == "darwin" && (
+          <Button variant="cta" onPress={() => openLog()}>
+            <Text>Open Log</Text>
+          </Button>
+        )}
+        <Button
+          variant="primary"
+          onPress={() => logMessage("info", `Info from CEP`)}
+        >
+          <Text>Log Info</Text>
+        </Button>
+        <Button
+          variant="primary"
+          onPress={() => logMessage("error", `Error from CEP`)}
+        >
+          <Text>Log Error</Text>
+        </Button>
+      </ButtonGroup>
+    </Flex>
   );
 }

@@ -18,6 +18,7 @@
     "zxp": "create-zxp ./dist"
   },
   "dependencies": {
+    "@adobe/react-spectrum": "^3.14.0",
     "fs-extra": "^9.0.0",
     "pino": "^4.16.1"
   },
