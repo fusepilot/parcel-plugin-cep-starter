@@ -3,7 +3,7 @@ import {
   loadExtendscript,
   getExtensionPath,
   getHostEnvironment,
-  RGBColor
+  RGBColor,
 } from "cep-interface";
 
 if (inCEPEnvironment()) {
@@ -28,8 +28,10 @@ if (inCEPEnvironment()) {
   if (host) {
     const skin = host.appSkinInfo;
     const bgColor = skin.panelBackgroundColor.color as RGBColor;
-    document.body.style.background = `rgb(${parseInt(bgColor.red.toString())}, ${parseInt(bgColor.green.toString())}, ${
-      parseInt(bgColor.blue.toString())
-    })`;
+    document.body.style.background = `rgb(${parseInt(
+      bgColor.red.toString()
+    )}, ${parseInt(bgColor.green.toString())}, ${parseInt(
+      bgColor.blue.toString()
+    )})`;
   }
 }
