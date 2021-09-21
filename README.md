@@ -80,3 +80,7 @@ export function Component() {
 ```
 
 This will append a log message to a file on disk.
+
+### CEP Configuration
+
+See [fusepilot/parcel-plugin-cep](https://github.com/fusepilot/parcel-plugin-cep)
