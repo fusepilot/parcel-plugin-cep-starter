@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useExtensionProperties } from "./useExtensionProperties";
+import { useExtension } from "./useExtension";
 
 export function usePlatform() {
   const [platform, setPlatfrom] = React.useState(null);
-  const { isInCEPEnvironment } = useExtensionProperties();
+  const { isInCEPEnvironment } = useExtension();
 
   React.useEffect(() => {
     if (isInCEPEnvironment) {

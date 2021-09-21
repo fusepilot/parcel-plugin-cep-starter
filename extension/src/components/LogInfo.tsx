@@ -1,40 +1,12 @@
 import * as React from "react";
-import { useExtensionProperties } from "../hooks/useExtensionProperties";
+import { useExtension } from "../hooks/useExtension";
+import { useLogger } from "../hooks/useLogger";
 import { usePlatform } from "../hooks/usePlatform";
 
 export default function LogInfo() {
-  const [logPath, setLogPath] = React.useState(null);
   const platform = usePlatform();
-
-  const { isInCEPEnvironment, name } = useExtensionProperties();
-
-  React.useEffect(() => {
-    async function loadLogPath() {
-      if (isInCEPEnvironment) {
-        const logger = await import("../logger");
-        setLogPath(logger.logPath);
-      }
-    }
-
-    loadLogPath();
-  }, [isInCEPEnvironment]);
-
-  const logMessage = async (level: string, message: string = "log") => {
-    if (isInCEPEnvironment) {
-      const { logger } = await import("../logger");
-      logger[level](message);
-    }
-  };
-
-  const openLog = async () => {
-    if (isInCEPEnvironment) {
-      // @ts-ignore
-      const child = window.cep_node.require("child_process");
-      if (platform === "darwin") {
-        child.spawn("open", [logPath]);
-      }
-    }
-  };
+  const { openLog, logMessage, logPath } = useLogger();
+  const { isInCEPEnvironment } = useExtension();
 
   return (
     <div className="LogInfo">
@@ -42,13 +14,10 @@ export default function LogInfo() {
 
       {!isInCEPEnvironment && <p>Not in CEP environment.</p>}
 
-      <ul>
-        <li>Path: {logPath}</li>
-      </ul>
-
       {platform == "darwin" && (
         <button onClick={() => openLog()}>Open Log</button>
       )}
+      <p>{logPath}</p>
       <button onClick={() => logMessage("info", `Info from CEP`)}>
         Log Info
       </button>

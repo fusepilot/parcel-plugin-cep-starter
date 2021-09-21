@@ -1,21 +1,21 @@
 import * as React from "react";
-import { useExtensionProperties } from "../hooks/useExtensionProperties";
+import { useExtension } from "../hooks/useExtension";
 
 export default function AdobeAppInfo() {
-  const extensionProperties = useExtensionProperties();
+  const { isInCEPEnvironment, id, version, extensionPath } = useExtension();
 
   return (
     <div className="AdobeAppInfo">
       <h3>Adobe App Info</h3>
-      {!extensionProperties.isInCEPEnvironment && (
+      {isInCEPEnvironment ? (
+        <ul>
+          <li>Id: {id}</li>
+          <li>Version: {version}</li>
+          <li>Extension Path: {extensionPath}</li>
+        </ul>
+      ) : (
         <p>Not in CEP environment.</p>
       )}
-      <ul>
-        <li>Id: {extensionProperties.id}</li>
-        <li>Name: {extensionProperties.name}</li>
-        <li>Version: {extensionProperties.version}</li>
-        <li>Extension Path: {extensionProperties.extensionPath}</li>
-      </ul>
     </div>
   );
 }
