@@ -1,6 +1,6 @@
 {
   "name": "react-parcel-cep-starter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "cep": {
     "name": "React Parcel CEP Starter",
     "id": "com.mycompany.myextension",
