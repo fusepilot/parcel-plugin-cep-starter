@@ -6,13 +6,11 @@ function showAlert() {
 
 function getInfo() {
   return JSON.stringify({
-    id,
-    name: app.name,
-    version: app.version
+    version: app.version,
   });
 }
 
 $.global[id] = {
   showAlert,
-  getInfo
+  getInfo,
 };

@@ -1,14 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import App from "./containers/App";
-
+import App from "./App";
 import "./index.css";
 
 import { inCEPEnvironment } from "cep-interface";
 
 if (inCEPEnvironment()) {
-  import("./extendscript");
+  import("./utils/loadExtendscript");
 }
 
 ReactDOM.render(<App />, document.getElementById("root") as HTMLElement);
