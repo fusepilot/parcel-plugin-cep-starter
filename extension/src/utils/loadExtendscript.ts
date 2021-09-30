@@ -7,7 +7,7 @@ import {
 } from "cep-interface";
 
 if (inCEPEnvironment()) {
-  const { logger } = require("./utils/logger");
+  const { logger } = require("../utils/logger");
   const extensionPath = getExtensionPath();
 
   logger.info("start", extensionPath);
