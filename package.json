@@ -37,7 +37,7 @@
     "parcel-plugin-cep": "^1.3.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
-    "types-for-adobe": "bbb999/types-for-adobe",
+    "types-for-adobe": "^6.0.1",
     "typescript": "^2.8.3"
   }
 }

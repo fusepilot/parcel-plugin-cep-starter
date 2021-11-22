@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "noLib": true,
     "strict": true,
-    "types": ["AfterEffects/18.0"],
+    "types": ["AfterEffects/2018"],
     "typeRoots": ["../node_modules/types-for-adobe", "./typings"]
   },
   "include": [
