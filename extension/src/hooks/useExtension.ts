@@ -12,7 +12,10 @@ export function useExtension() {
     extensionPath: undefined,
     isInCEPEnvironment: false,
     openUrl: (url: string) => console.log("Opening URL:", url),
-    evalScript: (script: string) => console.log("Running Script:", script),
+    evalScript: async (script: string): Promise<string> => {
+      console.log("Running Script:", script);
+      return `Ran script: ${script}`;
+    },
   });
 
   React.useEffect(() => {
@@ -33,7 +36,7 @@ export function useExtension() {
           extensionPath,
           isInCEPEnvironment: true,
           openUrl: openURLInDefaultBrowser,
-          evalScript: (script) =>
+          evalScript: async (script: string) =>
             evalExtendscript(`$.global["${id}"].${script}`),
         });
       }
